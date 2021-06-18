@@ -32,16 +32,20 @@
     <div class="row">
       <div class="col-md-12">
         <div class="section-heading">
-          <h2>Latest Products</h2>
+          @isset($tag)
+          <h2>Tag : {{ $tag->name}}</h2>
+          @else
+          <h2>All Product</h2>
+          @endisset
           <a href="/product">view all products <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
       @forelse($posts as $post)
       <div class="col-md-4">
         <div class="product-item">
-          <a href="/show/{{ $post->slug }}"><img src="{{ asset('assets/images/'. $post->image) }}" alt="" width="200" height="200"></a>
+          <a href="{{ URL::to('/show/'.$post->slug) }}"><img src="{{ asset('assets/images/'. $post->image) }}" alt="" width="200" height="200"></a>
           <div class="down-content">
-            <a href="/show/{{ $post->slug }}">
+            <a href="{{ URL::to('/show/'.$post->slug)}}">
               <h4>{{ $post->title }}</h4>
             </a>
             <h6>IDR {{ $post->price }} </h6>
@@ -81,7 +85,7 @@
       <div class="col-md-6">
         <div class="left-content">
           <h4>Looking for the best products?</h4>
-          <p><a rel="nofollow" href="https://fauzan.divistant.com" target="_parent">This template</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer blandit metus nec lectus rhoncus ultricies. Morbi a libero nec augue rhoncus maximus. Vivamus blandit risus a ex ultrices luctus. <a rel="nofollow" href="/contact">Contact us</a> for more info.</p>
+          <p><a rel="nofollow" href="https://fauzan.divistant.com" target="_parent">This Website</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer blandit metus nec lectus rhoncus ultricies. Morbi a libero nec augue rhoncus maximus. Vivamus blandit risus a ex ultrices luctus. <a rel="nofollow" href="/contact">Contact us</a> for more info.</p>
           <ul class="featured-list">
             <li><a href="#">Lorem ipsum dolor sit amet</a></li>
             <li><a href="#">Consectetur an adipisicing elit</a></li>

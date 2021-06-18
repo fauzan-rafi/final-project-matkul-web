@@ -14,8 +14,13 @@ class CreateStoreTagTable extends Migration
     public function up()
     {
         Schema::create('store_tag', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->foreignId('store_id');
+            $table->foreignId('tag_id');
+
+            $table->primary(['store_id', 'tag_id']);
+
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 

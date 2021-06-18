@@ -28,6 +28,7 @@ Route::get('about','TeamController@index');
 
 Route::get('product/', 'CategoryController@index');
 Route::get('product/{category:slug}', 'CategoryController@show');
+Route::get('tags/{tag:slug}', 'TagController@show');
 
 Route::view('contact','store.contact');
 
