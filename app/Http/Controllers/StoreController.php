@@ -7,6 +7,7 @@ use App\Category;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
+use App\Tag;
 
 class StoreController extends Controller
 {
@@ -39,7 +40,11 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view('admin.create',['store' => new Store()]);
+        return view('admin.create',[
+            'store' => new Store(),
+            'categories' => Category::get(),
+            'tags' => Tag::get()
+        ]);
     }
 
     /**
@@ -55,8 +60,10 @@ class StoreController extends Controller
 
         $attr['slug'] = \Str::slug(request('title'));
 
-        Store::create($attr);
+        $attr['category_id'] = request('category');
 
+        $store = Store::create($attr);
+        $store->tags()->attach(request('tags'));
         // flash message
         session()->flash('success','The post was created');
 
@@ -84,7 +91,11 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        return view('admin.edit',compact('store'));
+        return view('admin.edit',[
+            'store' => $store,
+            'categories' => Category::get(),
+            'tags' => Tag::get()
+        ]);
     }
 
     /**
@@ -98,12 +109,14 @@ class StoreController extends Controller
     {
 
         $attr = $request->all();
-        
+
+        $attr['category_id'] = request('category');
         // upload in database with modified name
         // $attr['image'] = $imgName;
 
         $store->update($attr);
 
+        $store->tags()->sync(request('tags'));
         // flash message
         session()->flash('success','The post was edited');
 

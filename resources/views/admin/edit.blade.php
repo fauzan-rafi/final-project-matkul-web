@@ -22,7 +22,7 @@
                               <form action="/admin/{{ $store->slug }}/edit" method="post" enctype="multipart/form-data">
                                     @method('patch')
                                     @csrf
-                                    @include('layouts.partial.form-control',['submit' => 'Insert'])
+                                    @include('layouts.partial.form-control')
                               </form>
                         </div>
                   </div>

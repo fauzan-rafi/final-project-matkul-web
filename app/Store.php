@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    protected $fillable = ['title','image','slug','description','price','stock'];
+    protected $fillable = ['title','image','slug','description','price','stock','category_id'];
 
     // if just you allow to submit form
     // protected $guarded = [];

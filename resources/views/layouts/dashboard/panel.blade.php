@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/templatemo-sixteen.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
 
     <title>{{ $title ?? ''}}</title>
 </head>
@@ -94,12 +97,12 @@
                     <a href="/" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Home Page</span>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <a href="/about" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Teams</span>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                    <!-- <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Tables</span>
-                    </a>
+                    </a> -->
                 </div>
                 <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
@@ -114,12 +117,18 @@
                     <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Settings</span>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Password</span>
-                    </a>
-                    <a href="../logout.php" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Logout</span>
-                    </a>
+                    <!-- <a href="{{ route('register') }}" class=" list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed">{{-- __('Register') --}}</span>
+                    </a> -->
+                    <div>
+                        <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-dark text-white" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <span class="menu-collapsed">{{ __('Logout') }}</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
                 </div>
 
             </ul>
@@ -135,6 +144,7 @@
     <!-- javascript -->
     <!-- Bootstrap core JavaScript -->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Additional Scripts -->
@@ -143,6 +153,14 @@
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <script src="{{ asset('assets/js/isotope.js') }}"></script>
     <script src="{{ asset('assets/js/accordions.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Choose tags!"
+            });
+        });
+    </script>
 
 
 </body>
