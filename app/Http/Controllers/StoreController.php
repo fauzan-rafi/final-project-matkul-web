@@ -58,9 +58,17 @@ class StoreController extends Controller
         // simple version
         $attr = $request->all();
 
-        $attr['slug'] = \Str::slug(request('title'));
+        $slug = \Str::slug(request('title'));
+        $attr['slug'] = $slug;
+        
+        if(request()->file('image')){
+            $imageUrl = request()->file('image')->store("images/posts");
+        }else{
+            $imageUrl = "default.png";
+        }
 
         $attr['category_id'] = request('category');
+        $attr['image'] = $imageUrl;
 
         $store = Store::create($attr);
         $store->tags()->attach(request('tags'));
@@ -110,9 +118,16 @@ class StoreController extends Controller
 
         $attr = $request->all();
 
+        if (request()->file('image')) {
+            \Storage::delete($store->image);
+            $imageUrl = request()->file('image')->store("images/posts");
+        }else{
+            $imageUrl = $store->image;
+        }
+
+
         $attr['category_id'] = request('category');
-        // upload in database with modified name
-        // $attr['image'] = $imgName;
+        $attr['image'] = $imageUrl;
 
         $store->update($attr);
 
@@ -134,26 +149,12 @@ class StoreController extends Controller
     {
         $store->delete();
 
+        \Storage::delete($store->image);
+
         session()->flash('success','The post was deleted');
 
         return redirect()->to('dashboard');
     }
 
-    public function validateImage()
-    {
-        if (!request('image')) {
-
-            // to set name image, menghindari duplikasi file
-            $imgName = 'default.png';
-        } else {
-            // to set name image, menghindari duplikasi file
-            $imgName = request('image')->getClientOriginalName() . '-' . time() . '.' . request('image')->extension();
-
-            // merubah direktori penyimpanan
-            request('image')->move(public_path('assets/images'), $imgName);
-        }
-
-        // upload in database with modified name
-        $attr['image'] = $imgName;
-    }
+    
 }

@@ -31,7 +31,7 @@ Route::get('/','StoreController@index')->name('store.index');
 Route::get('/show/{store:slug}','StoreController@show');
 
 // for show category
-Route::get('product/', 'CategoryController@index');
+Route::get('product/', 'CategoryController@index')->name('store.product');
 Route::get('product/{category:slug}', 'CategoryController@show');
 
 // for show tags product

@@ -41,48 +41,48 @@
             @forelse($posts as $post)
             @if($post->category->slug == 'celana')
             <div class="col-lg-4 col-md-4 all des">
-            @elseif($post->category->slug == 'sepatu')
-            <div class="col-lg-4 col-md-4 all dev">
-            @elseif($post->category->slug == 'pakaian')
-            <div class="col-lg-4 col-md-4 all gra">
-            @endif
-                <div class="product-item">
-                  <a href="#"><img src="{{ asset('assets/images/'. $post->image) }}" alt="" width="200" height="200"></a>
-                  <div class="down-content">
-                    <a href="/show/{{ $post->slug }}">
-                      <h4>{{ $post->title }}</h4>
-                    </a>
-                    <h6>IDR {{ $post->price }} </h6>
-                    <p> {{ Str::limit($post->description,90,'') }} </p>
-                    <ul class="stars">
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                    </ul>
-                    <span>Reviews (24)</span>
+              @elseif($post->category->slug == 'sepatu')
+              <div class="col-lg-4 col-md-4 all dev">
+                @elseif($post->category->slug == 'pakaian')
+                <div class="col-lg-4 col-md-4 all gra">
+                  @endif
+                  <div class="product-item">
+                    <a href="#"><img src="{{ $post->takeImage }}" style="width: 320px; height: 200px; object-fit: cover ; object-position:center; "></a>
+                    <div class="down-content">
+                      <a href="/show/{{ $post->slug }}">
+                        <h4>{{ $post->title }}</h4>
+                      </a>
+                      <h6>IDR {{ $post->price }} </h6>
+                      <p> {{ Str::limit($post->description,90,'') }} </p>
+                      <ul class="stars">
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                      </ul>
+                      <span>Reviews (24)</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              @empty
-              <div class="col-md-6">
-                <div class="alert alert-info">
-                  There's no post
+                @empty
+                <div class="col-md-6">
+                  <div class="alert alert-info">
+                    There's no post
+                  </div>
                 </div>
+                @endforelse
               </div>
-              @endforelse
             </div>
           </div>
-        </div>
-        <div class="col-md-12">
-          <div class="d-flex justify-content-center">
-            <div>
-              {{ $posts->links() }}
+          <div class="col-md-12">
+            <div class="d-flex justify-content-center">
+              <div>
+                {{ $posts->links() }}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  @stop
+    @stop

@@ -43,13 +43,13 @@
       @forelse($posts as $post)
       <div class="col-md-4">
         <div class="product-item">
-          <a href="{{ URL::to('/show/'.$post->slug) }}"><img src="{{ asset('assets/images/'. $post->image) }}" alt="" width="200" height="200"></a>
+          <a href="{{ URL::to('/show/'.$post->slug) }}"><img src="{{ $post->takeImage }}"  style="width: 320px; height: 200px; object-fit: cover ; object-position:center; "></a>
           <div class="down-content">
             <a href="{{ URL::to('/show/'.$post->slug)}}">
               <h4>{{ $post->title }}</h4>
             </a>
             <h6>IDR {{ $post->price }} </h6>
-            <p> {{ Str::limit($post->description,90,'') }} </p>
+            <p> {{ Str::limit($post->description,20,'') }} </p>
             <ul class="stars">
               <li><i class="fa fa-star"></i></li>
               <li><i class="fa fa-star"></i></li>

@@ -110,7 +110,7 @@
                 <td> {{ $i }} </thd>
                 <td> {{ $post->title }} </td>
                 <td>
-                    <img src="{{ asset('assets/images/'. $post->image) }} " alt="..." class="img-thumbnail" width="100" height="100">
+                    <img class="img-thumbnail" src="{{ $post->takeImage }}" style="width: 100px; object-fit: cover ; object-position:center; ">
                 </td>
 
                 <td>

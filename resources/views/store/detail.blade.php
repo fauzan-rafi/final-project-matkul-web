@@ -8,9 +8,9 @@
 @section('content')
 <div class="banner">
       <div class="container mt-5 mb-5">
-            <div class="row p-2 bg-white border rounded">
-                  <div class="col-md-4">
-                        <img class="card-img-top" src="{{ asset('assets/images/'. $store->image)}}" alt="" width="200" height="200">
+            <div class="row p-4 bg-white border rounded">
+                  <div class="col-md-6 d-flex align-items-center">
+                        <img class="card-img-top" src="{{ $store->takeImage }}" style="width: 350px; object-fit: cover ; object-position:center; ">
                   </div>
                   <hr>
                   <div class="col-md-6">
@@ -37,10 +37,15 @@
                               <h4 class="mr-1">Rp. {{ $store->price }}</h4>
                               <p class=""> Stock : {{ $store->stock }}</p>
                         </div>
-
+                        <br>
+                        <div>
+                              <a href="{{ route('store.product') }}" class="btn btn-success btn-sm"> Back to Main</a>
+                        </div>
+                        <br>
                         @auth
                         <div class="">
                               <a role="button" class="btn btn-sm btn-success text-light" href="/admin/{{$store->slug}}/edit">Edit</a>
+
                               <form action="/admin/{{ $store->slug }}/delete" method="post">
                                     @csrf
                                     @method('delete')

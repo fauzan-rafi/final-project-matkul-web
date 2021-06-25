@@ -16,6 +16,18 @@
 </div>
 <input type="hidden" name="old-image" value="{{ $store->image }}"> -->
 <!-- End of uploaded image -->
+<div class="form-group">
+      <h4>Image</h4>
+      <br>
+      <img src="{{ $store->takeImage }}" width="150">
+      <br>
+      <input type="file" name="image" id="image">
+      @error('image')
+      <div class="invalid-feedback">
+            {{ $message }}
+      </div>
+      @enderror
+</div>
 
 <div class="form-group">
       <label for="price">Price</label>
