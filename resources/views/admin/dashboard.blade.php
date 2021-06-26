@@ -10,7 +10,7 @@
 <div class="container bg-white ">
     <div class="d-flex justify-content-between align-items-center">
         <div>
-            <h1 class="text-2xl font-light px-10 py-5">Hello Admin</h1>
+            <h1 class="text-2xl font-light px-10 py-5">Hello {{ Auth::user()->name }}</h1>
         </div>
         <div>
             <a class="btn btn-primary rounded-pill" role="button" href="/admin/create">Insert data</a>
