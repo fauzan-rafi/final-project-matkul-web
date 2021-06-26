@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+// For production
+// if (App::environment('production')) {
+//       URL::forceScheme('https');
+// }
 
 
 // ------------------ for dashboard -------------------------------------
