@@ -30,7 +30,7 @@
               <a href="/product/sepatu"> Sepatu </a>
             </li>
             <li data-filter=".gra">
-              <a href="/product/pakaian"> Pakaian </a>
+              <a href="/product/baju"> Baju </a>
             </li>
           </ul>
         </div>
@@ -43,7 +43,7 @@
             <div class="col-lg-4 col-md-4 all des">
               @elseif($post->category->slug == 'sepatu')
               <div class="col-lg-4 col-md-4 all dev">
-                @elseif($post->category->slug == 'pakaian')
+                @elseif($post->category->slug == 'baju')
                 <div class="col-lg-4 col-md-4 all gra">
                   @endif
                   <div class="product-item">
