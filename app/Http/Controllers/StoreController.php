@@ -18,7 +18,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        return view('store.index',[
+        return view('store.index', [
             'posts' => Store::latest()->paginate(6),
         ]);
     }
@@ -28,7 +28,7 @@ class StoreController extends Controller
     */
     public function dashboard()
     {
-        return view('admin.dashboard',[
+        return view('admin.dashboard', [
             'posts' => Store::latest()->paginate(6),
         ]);
     }
@@ -40,7 +40,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view('admin.create',[
+        return view('admin.create', [
             'store' => new Store(),
             'categories' => Category::get(),
             'tags' => Tag::get()
@@ -60,10 +60,10 @@ class StoreController extends Controller
 
         $slug = \Str::slug(request('title'));
         $attr['slug'] = $slug;
-        
-        if(request()->file('image')){
+
+        if (request()->file('image')) {
             $imageUrl = request()->file('image')->store("images/posts");
-        }else{
+        } else {
             $imageUrl = "default.png";
         }
 
@@ -73,11 +73,10 @@ class StoreController extends Controller
         $store = Store::create($attr);
         $store->tags()->attach(request('tags'));
         // flash message
-        session()->flash('success','The post was created');
+        session()->flash('success', 'The post was created');
 
         // redirect to dashboard
         return redirect()->to('dashboard');
-
     }
 
     /**
@@ -99,7 +98,7 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        return view('admin.edit',[
+        return view('admin.edit', [
             'store' => $store,
             'categories' => Category::get(),
             'tags' => Tag::get()
@@ -121,7 +120,7 @@ class StoreController extends Controller
         if (request()->file('image')) {
             \Storage::delete($store->image);
             $imageUrl = request()->file('image')->store("images/posts");
-        }else{
+        } else {
             $imageUrl = $store->image;
         }
 
@@ -133,7 +132,7 @@ class StoreController extends Controller
 
         $store->tags()->sync(request('tags'));
         // flash message
-        session()->flash('success','The post was edited');
+        session()->flash('success', 'The post was edited');
 
         // redirect to dashboard
         return redirect()->to('dashboard');
@@ -151,10 +150,8 @@ class StoreController extends Controller
 
         \Storage::delete($store->image);
 
-        session()->flash('success','The post was deleted');
+        session()->flash('success', 'The post was deleted');
 
         return redirect()->to('dashboard');
     }
-
-    
 }
